@@ -3,15 +3,12 @@ import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF";
 import * as BABYLON from "@babylonjs/core";
 
-import { World } from "./world";
-import { Client } from "./Multiplayer/client/client";
-import { ThirdPersonCamera } from "./ThirdPersonCamera";
-import * as Glory from "./Glory";
+
+import * as Glory from "./Glory/index";
+
 
 export class App {
-    public world: World;
-    public camera: ThirdPersonCamera;
-    public inputManager: Glory.InputManager;
+    
 
     constructor() {
         // create the canvas html element and attach it to the webpage
@@ -20,10 +17,10 @@ export class App {
         canvas.style.height = "100%";
         canvas.id = "gameCanvas";
         document.body.appendChild(canvas);
-
-        // initialize babylon scene and engine
-        var engine = new BABYLON.Engine(canvas, true);
-        var scene = new BABYLON.Scene(engine);
+        
+        Glory.init(canvas);
+        const scene = Glory.getScene();
+        const engine = Glory.getEngine();
 
         var camera: BABYLON.ArcRotateCamera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, BABYLON.Vector3.Zero(), scene);
         camera.attachControl(canvas, true);
@@ -33,18 +30,23 @@ export class App {
         // //position camera on the corder of the ground
         camera.setTarget(BABYLON.Vector3.Zero());
         camera.setPosition(new BABYLON.Vector3(0, 2, -5));
-
-        this.inputManager = new Glory.InputManager();
-        this.world = new World(scene, this.inputManager, engine);
-        this.camera = new ThirdPersonCamera(scene);
         
-        // this.camera.createFollowCamera(this.world.players[0].getMesh());
+        //DONE: Game Object create and dispose
+        // const obj1 = new Glory.GameObject("obj1", scene);
+        // console.log("Before Objects: ", Glory.getGameObjects());
+        // obj1.dispose();
+        // console.log("After objects: ", Glory.getGameObjects());
 
+        let obj2 = new Glory.GameObject("ob1", scene);
+        const obj2Mesh = new Glory.MeshComponent(obj2, "obj2Mesh");
+        obj2.addComponent(obj2Mesh);
+        console.log("Components: ", obj2.components);
+        obj2.dispose();
+        console.log(obj2);
+        // console.log(obj2Mesh.createMesh());
         
-
         // hide/show the Inspector
         window.addEventListener("keydown", (ev) => {
-            this.inputManager.init(ev);
             // Shift+Ctrl+Alt+I
             if (ev.shiftKey && ev.ctrlKey && ev.altKey && ev.keyCode === 73) {
                 if (scene.debugLayer.isVisible()) {
@@ -53,22 +55,12 @@ export class App {
                     scene.debugLayer.show();
                 }
             }
-
-            console.log("Key :", this.inputManager.getKey());
-            console.log("Horizontal: " + this.inputManager.Horizontal());
-            console.log("Vertical: " + this.inputManager.Vertical());
         });
 
-        window.addEventListener("keyup", (ev) => {
-            this.inputManager.reset();
-        });
-        
         // run the main render loop
         engine.runRenderLoop(() => {
             scene.render();
             engine.resize();
-
-            this.world.Update();
         });
     }
 }

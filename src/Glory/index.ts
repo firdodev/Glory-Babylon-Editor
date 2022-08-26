@@ -1,4 +1,5 @@
-export {default as MeshComponent} from './Components/MeshComponent';
-export {default as CharacterController} from './Components/CharacterController';
-export {default as InputManager} from './Components/InputManager';
-export {default as GameObject} from './Components/GameObject';
+export { INFO as INFO, ERROR as ERROR, WARN as WARN }  from "./Core/Log";
+export {init,getScene,getEngine,getGameObjects} from "./Core/Scene";
+
+export { GameObject } from "./Core/Components/GameObject";
+export { MeshComponent } from "./Core/Components/Mesh/MeshComponent";
