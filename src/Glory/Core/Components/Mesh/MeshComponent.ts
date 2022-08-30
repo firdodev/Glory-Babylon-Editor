@@ -5,16 +5,21 @@ import * as BABYLON from "@babylonjs/core"
 export class MeshComponent extends Component{
   protected mesh: any;
 
-  public position: BABYLON.Vector3;
-  public rotation: BABYLON.Vector3;
-
   public meshName: String;
+  public transform = {
+    position: new BABYLON.Vector3,
+    rotation: new BABYLON.Vector3
+  };
 
-  constructor(gameObject: GameObject, name: String){
+  constructor(gameObject: GameObject, name: String, scene: BABYLON.Scene){
     super(name, gameObject);
     this.meshName = name;
 
     this.createMesh();
+  
+    this.transform = {
+      
+    }
   }
 
   createMesh(){
@@ -24,4 +29,7 @@ export class MeshComponent extends Component{
   public dispose() {
     this.mesh.dispose();
   }
+
+
+
 }

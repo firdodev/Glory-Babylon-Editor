@@ -44,9 +44,18 @@ import * as LOG from "./Log";
   }
 
   export function removeObject(gameObject: GameObject){
-    for(let index in gameObjects){
-      if(gameObjects[index] === gameObject){
-        gameObjects.splice(Number(index), 1);
+    for(let i = 0; i < gameObjects.length; i++){
+      if(gameObjects[i] === gameObject){
+        
+        let object = gameObjects[i];
+        while(object.components.length > 0){
+          object.components[0].dispose();
+          object.removeComponent(object.components[0]);
+        }
+
+        delete gameObjects[i];
+        gameObjects.splice(Number(i), 1);
+        return;
       }
     }
   }

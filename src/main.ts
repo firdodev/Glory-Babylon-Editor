@@ -41,10 +41,7 @@ export class App {
         const obj2Mesh = new Glory.MeshComponent(obj2, "obj2Mesh");
         obj2.addComponent(obj2Mesh);
         console.log("Components: ", obj2.components);
-        obj2.dispose();
-        console.log(obj2);
         // console.log(obj2Mesh.createMesh());
-        
         // hide/show the Inspector
         window.addEventListener("keydown", (ev) => {
             // Shift+Ctrl+Alt+I
@@ -60,6 +57,7 @@ export class App {
         // run the main render loop
         engine.runRenderLoop(() => {
             scene.render();
+            obj2Mesh.transform.position = new BABYLON.Vector3(2,3,5);
             engine.resize();
         });
     }

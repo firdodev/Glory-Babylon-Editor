@@ -18,4 +18,13 @@ export class ComponentList{
       }
     }
   }
+
+  removeComponent(component){
+    for(let i in this.components){
+      if(this.components[i] === component){
+        delete this.components[i];
+        this.components.splice(Number(i), 1);
+      }
+    }
+  }
 }

@@ -30,10 +30,6 @@ export class GameObject extends ComponentList{
   }
 
   public dispose(){
-    for(let index in this.components){
-      this.components[index].dispose();
-      this.components.splice(Number(index),this.components.length);
-    }
     Scene.removeObject(this);
   }
 }
