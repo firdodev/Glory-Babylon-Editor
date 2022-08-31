@@ -3,19 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initil-scale=1.0" />
-    <title>Third Person Multiplayer</title>
-    <style>
-      body,html{
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-    </style>
+    <title>Glory ECS</title>
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-    <!--<canvas id="app"></canvas> -->
+    <div class="Editor">
+      <div id="gameObjects">
+        <h4>Entities</h4>
+        <ul id="entities"></ul>
+      </div>
+      <canvas id="gameView"></canvas>
+      <div id="gameObjects">
+        <h4>Inspector</h4>
+        <h5 id="Entitie_Name"></h5>
+        <ul id="inspector"></ul>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/Glory/Editor/Entities/ShowComponents.ts"></script>
   </body>
 </html>

@@ -12,36 +12,34 @@ export class App {
 
     constructor() {
         // create the canvas html element and attach it to the webpage
-        var canvas = document.createElement("canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.id = "gameCanvas";
-        document.body.appendChild(canvas);
+        var canvas = document.getElementById("gameView");
         
         Glory.init(canvas);
         const scene = Glory.getScene();
         const engine = Glory.getEngine();
 
-        var camera: BABYLON.ArcRotateCamera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, BABYLON.Vector3.Zero(), scene);
-        camera.attachControl(canvas, true);
+        var camera = new Glory.Camera(scene, Glory.CameraType.ARCROTATECAMERA);
+        camera.getCamera().attachControl(canvas, true);
+
         var light1: BABYLON.HemisphericLight = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
         light1.intensity = 3;
 
         // //position camera on the corder of the ground
         camera.setTarget(BABYLON.Vector3.Zero());
-        camera.setPosition(new BABYLON.Vector3(0, 2, -5));
+        camera.getCamera().setPosition(new BABYLON.Vector3(0, 2, -5));
         
-        //DONE: Game Object create and dispose
-        // const obj1 = new Glory.GameObject("obj1", scene);
-        // console.log("Before Objects: ", Glory.getGameObjects());
-        // obj1.dispose();
-        // console.log("After objects: ", Glory.getGameObjects());
 
         let obj2 = new Glory.GameObject("ob1", scene);
-        const obj2Mesh = new Glory.MeshComponent(obj2, "obj2Mesh");
+        const obj2Mesh = new Glory.MeshComponent(obj2, "obj2Mesh", scene, Glory.MeshType.SPHERE);
         obj2.addComponent(obj2Mesh);
         console.log("Components: ", obj2.components);
-        // console.log(obj2Mesh.createMesh());
+
+        let obj3 = new Glory.GameObject("ob2", scene);
+        const obj3Mesh = new Glory.MeshComponent(obj2, "obj3Mesh", scene, Glory.MeshType.BOX);
+        obj3.addComponent(obj3Mesh);
+        console.log("Components: ", obj2.components);
+        obj3Mesh.transform.position.x += 1;
+
         // hide/show the Inspector
         window.addEventListener("keydown", (ev) => {
             // Shift+Ctrl+Alt+I
@@ -57,7 +55,6 @@ export class App {
         // run the main render loop
         engine.runRenderLoop(() => {
             scene.render();
-            obj2Mesh.transform.position = new BABYLON.Vector3(2,3,5);
             engine.resize();
         });
     }

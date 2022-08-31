@@ -3,9 +3,9 @@ import { ComponentList } from "./ComponentList";
 
 export class GameObject extends ComponentList{
   private scene;
-  private name: String;
+  private name: string;
 
-  constructor(name:String, scene){
+  constructor(name:string, scene){
     super();
     this.name = name;
     this.scene = scene;
@@ -26,7 +26,11 @@ export class GameObject extends ComponentList{
   }
 
   public addComponent(componentType){
-    this.addComponents(componentType)
+    this.addComponents(componentType);
+  }
+
+  public getComponents(){
+    return this.components;
   }
 
   public dispose(){

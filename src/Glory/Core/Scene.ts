@@ -1,5 +1,6 @@
 import * as BABYLON from "@babylonjs/core";
 import { GameObject } from "./Components/GameObject";
+import * as Editor from "../Editor/index";
 import * as LOG from "./Log";
 
   var scene: BABYLON.Scene;
@@ -41,6 +42,7 @@ import * as LOG from "./Log";
 
   export function addObject(gameObject: GameObject){
     gameObjects.push(gameObject);
+    Editor.addEntity(gameObject.getName());
   }
 
   export function removeObject(gameObject: GameObject){

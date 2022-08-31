@@ -1,10 +1,10 @@
 import { GameObject } from "./GameObject";
 
 export class Component{
-  public name: String;
+  public name: string;
   public object: GameObject;
 
-  constructor(name: String, object: GameObject){
+  constructor(name: string, object: GameObject){
     this.name = name;
     this.object = object;
   }

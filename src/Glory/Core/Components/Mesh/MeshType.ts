@@ -1,0 +1,13 @@
+export enum MeshType{
+  BOX,
+  TILED_BOX,
+  SPHERE,
+  CYLINDER,
+  CAPSULE,
+  PLANE,
+  TILED_PLANE,
+  DISC,
+  TORUS,
+  TORUS_KNOT,
+  GROUND
+}
