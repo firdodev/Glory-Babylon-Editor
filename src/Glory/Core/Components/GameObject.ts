@@ -1,5 +1,6 @@
 import * as Scene from "../Scene";
 import { ComponentList } from "./ComponentList";
+import { TransformComponent } from "./TransformComponent";
 
 export class GameObject extends ComponentList{
   private scene;
@@ -15,6 +16,7 @@ export class GameObject extends ComponentList{
 
   init(){
     Scene.addObject(this);
+    this.addComponent(new TransformComponent(this));
   }
 
   public getScene(){

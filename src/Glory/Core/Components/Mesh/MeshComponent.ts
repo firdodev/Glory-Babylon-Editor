@@ -46,6 +46,7 @@ export class MeshComponent extends Component{
 
         this.mesh.rotation = this.transform.rotation;
         this.mesh.position = this.transform.position;
+
       }
     });
   }
