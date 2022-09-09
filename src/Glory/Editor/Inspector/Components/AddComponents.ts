@@ -1,15 +1,13 @@
 import { GameObject } from "../../../Core/Components/GameObject";
 import { MeshComponent } from "../../../Core/Components/Mesh/MeshComponent";
 
+import * as BABYLON from "@babylonjs/core"
+import { TransformComponent } from "../../../Core/Components/TransformComponent";
+
+
 const ul = document.getElementById("inspector");
 var allComponent = document.getElementById("inspector").getElementsByTagName("li");
 
-export var posInputX;
-export var posInputY;
-export var posInputZ;
-export var rotInputX;
-export var rotInputY;
-export var rotInputZ;
 
 export function AddComponents(gameObject: GameObject){
   if(allComponent.length > 0){
@@ -28,13 +26,14 @@ export function AddComponents(gameObject: GameObject){
 
 function showAllPublicVariables(gameObject: GameObject, li: HTMLLIElement, index){
   // console.clear();
+
+  const keys = ["position", "rotation", "scale"];
+
   for(let i in gameObject.components[index]){
-    if(!(gameObject[i] instanceof Object) && gameObject[i] !== undefined){
-      if(i !== "name"){
-        li.appendChild(document.createElement("br"));
-        li.appendChild(document.createTextNode(i + ": " + gameObject[i]));
-        li.appendChild(document.createElement("br"));
-      }
+    const value = gameObject.components[index][i];
+    console.log(i, value); 
+    if(keys.includes(i)){
+      console.log(value._x, value._y, value._z);
     }
   }
 }

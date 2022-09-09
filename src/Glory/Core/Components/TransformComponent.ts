@@ -17,6 +17,7 @@ export class TransformComponent extends Component{
     this.position = BABYLON.Vector3.Zero();
     this.rotation = BABYLON.Vector3.Zero();
     this.scale = BABYLON.Vector3.Zero();
-
+    
   }
+
 }

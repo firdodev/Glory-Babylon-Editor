@@ -3,8 +3,6 @@ import { GameObject } from "../GameObject";
 import { MeshType } from "./MeshType";
 import * as BABYLON from "@babylonjs/core"
 
-import * as Editor from "../../../Editor/index";
-
 export class MeshComponent extends Component{
   
 
@@ -32,22 +30,8 @@ export class MeshComponent extends Component{
     
 
     this.scene.onBeforeRenderObservable.add(()=>{
-      // this.mesh.rotation = this.transform.rotation;
-      // this.mesh.position = this.transform.position;
-
-      if(Editor.posInputX != undefined){
-        this.transform.position.x = Editor.posInputX.value;
-        this.transform.position.y = Editor.posInputY.value;
-        this.transform.position.z = Editor.posInputZ.value;
-  
-        this.transform.rotation.x = Editor.rotInputX.value;
-        this.transform.rotation.y = Editor.rotInputY.value;
-        this.transform.rotation.z = Editor.rotInputZ.value;
-
-        this.mesh.rotation = this.transform.rotation;
-        this.mesh.position = this.transform.position;
-
-      }
+      this.mesh.rotation = this.transform.rotation;
+      this.mesh.position = this.transform.position;
     });
   }
 
