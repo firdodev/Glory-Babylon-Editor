@@ -8,6 +8,14 @@
   </head>
   <body>
     <div class="Editor">
+      <div id="top-ui-btn">
+        <button id="scaleGizmos">Scale</button>
+        <button id="positionGizmos">Position</button>
+        <button id="rotationGizmos">Rotation</button>
+
+
+        <button id="play">▶</button>
+      </div>
       <div id="gameObjects">
         <h4>Entities</h4>
         <ul id="entities"></ul>
@@ -21,5 +29,6 @@
     </div>
     <script type="module" src="/src/main.ts"></script>
     <script type="module" src="/src/Glory/Editor/Entities/ShowComponents.ts"></script>
+    <script type="module" src="/src/Glory/Editor/UI/GizmosActivator.ts"></script>
   </body>
 </html>

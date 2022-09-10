@@ -6,6 +6,8 @@ export class GameObject extends ComponentList{
   private scene;
   private name: string;
 
+  public transform: TransformComponent;
+
   constructor(name:string, scene){
     super();
     this.name = name;
@@ -16,7 +18,8 @@ export class GameObject extends ComponentList{
 
   init(){
     Scene.addObject(this);
-    this.addComponent(new TransformComponent(this));
+    this.transform = new TransformComponent(this);
+    this.addComponent(this.transform);
   }
 
   public getScene(){

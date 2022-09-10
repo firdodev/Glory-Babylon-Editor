@@ -8,6 +8,8 @@ import * as LOG from "./Log";
 
   var gameObjects: Array<GameObject>;
 
+  export var gizmoManager: BABYLON.GizmoManager;
+
   export function init(canvas){
     if(canvas == null || canvas == undefined){
       LOG.ERROR("You didn't provided us with canvas.");
@@ -18,6 +20,8 @@ import * as LOG from "./Log";
     }
 
     gameObjects = new Array<GameObject>;
+
+    gizmoManager = new BABYLON.GizmoManager(scene);
   }
 
   function createScene(){

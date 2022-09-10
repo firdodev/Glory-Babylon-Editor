@@ -25,20 +25,22 @@ export class App {
         light1.intensity = 3;
 
         // //position camera on the corder of the ground
-        camera.setTarget(BABYLON.Vector3.Zero());
         camera.getCamera().setPosition(new BABYLON.Vector3(0, 2, -5));
         
-
+        
         let obj2 = new Glory.GameObject("ob1", scene);
         const obj2Mesh = new Glory.MeshComponent(obj2, "obj2Mesh", scene, Glory.MeshType.SPHERE);
         obj2.addComponent(obj2Mesh);
-        console.log("Components: ", obj2.components);
-
+        // console.log("Components: ", obj2.components);
+        
         let obj3 = new Glory.GameObject("ob2", scene);
-        const obj3Mesh = new Glory.MeshComponent(obj2, "obj3Mesh", scene, Glory.MeshType.BOX);
+        obj3.transform.position.x = 2;
+        const obj3Mesh = new Glory.MeshComponent(obj3, "obj3Mesh", scene, Glory.MeshType.BOX);
         obj3.addComponent(obj3Mesh);
-        console.log("Components: ", obj2.components);
-        obj3Mesh.transform.position.x += 1;
+        // console.log("Components: ", obj2.components);
+
+        
+        // camera.setTarget(obj2Mesh.getMesh());
 
         // hide/show the Inspector
         window.addEventListener("keydown", (ev) => {

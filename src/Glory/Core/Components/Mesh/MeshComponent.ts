@@ -13,10 +13,7 @@ export class MeshComponent extends Component{
 
   public meshType: MeshType;
   public meshName: string;
-  public transform = {
-    position: new BABYLON.Vector3,
-    rotation: new BABYLON.Vector3
-  };
+  public color: string = "";
 
   constructor(gameObject: GameObject, name: string, scene: BABYLON.Scene, meshType: MeshType){
     super(name, gameObject);
@@ -26,52 +23,56 @@ export class MeshComponent extends Component{
     this.scene = scene;
 
     this.createMesh(meshType);
-  
-    
 
-    this.scene.onBeforeRenderObservable.add(()=>{
-      this.mesh.rotation = this.transform.rotation;
-      this.mesh.position = this.transform.position;
+    this.scene.registerBeforeRender(()=>{
+      // this.gameObject.transform.changeValueEveryFrame(this.getMesh().position, this.getMesh().rotation, this.getMesh().scaling)
+      this.gameObject.transform.position.x = this.getMesh().position.x;
+      this.gameObject.transform.position.y = this.getMesh().position.y;
+      this.gameObject.transform.position.z = this.getMesh().position.z;
     });
   }
 
   private createMesh(value){
     switch (value) {
       case MeshType.BOX:
-        this.mesh = BABYLON.MeshBuilder.CreateBox("box", {}, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateBox(this.meshName, {}, this.scene);
         break;
       case MeshType.CAPSULE:
-        this.mesh = BABYLON.MeshBuilder.CreateCapsule("capsule", null, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateCapsule(this.meshName, null, this.scene);
         break;
       case MeshType.CYLINDER:
-        this.mesh = BABYLON.MeshBuilder.CreateCylinder("cylinder", {}, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateCylinder(this.meshName, {}, this.scene);
         break;
       case MeshType.DISC:
-        this.mesh = BABYLON.MeshBuilder.CreateDisc("disc", {}, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateDisc(this.meshName, {}, this.scene);
         break;
       case MeshType.GROUND:
-        this.mesh = BABYLON.MeshBuilder.CreateGround("ground", {}, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateGround(this.meshName, {}, this.scene);
         break;
       case MeshType.PLANE:
-        this.mesh = BABYLON.MeshBuilder.CreatePlane("plane", {}, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreatePlane(this.meshName, {}, this.scene);
         break;
       case MeshType.SPHERE:
-        this.mesh = BABYLON.MeshBuilder.CreateSphere("sphere", {}, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateSphere(this.meshName, {}, this.scene);
         break;
       case MeshType.TILED_BOX:
-        this.mesh = BABYLON.MeshBuilder.CreateTiledBox("tiledBox", null, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateTiledBox(this.meshName, null, this.scene);
         break;
       case MeshType.TILED_PLANE:
-        this.mesh = BABYLON.MeshBuilder.CreateTiledPlane("tiledPLane", {}, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateTiledPlane(this.meshName, {}, this.scene);
         break;
       case MeshType.TORUS:
-        this.mesh = BABYLON.MeshBuilder.CreateTorus("torus", {}, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateTorus(this.meshName, {}, this.scene);
         break;
       case MeshType.TORUS_KNOT:
-        this.mesh = BABYLON.MeshBuilder.CreateTorusKnot("torusKnot", {}, this.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateTorusKnot(this.meshName, {}, this.scene);
         break;
     }
 
+  }
+
+  public getMesh(): BABYLON.Mesh{
+    return this.mesh;
   }
 
   public dispose() {
