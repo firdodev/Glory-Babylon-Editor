@@ -27,9 +27,8 @@ export class App {
         // //position camera on the corder of the ground
         camera.getCamera().setPosition(new BABYLON.Vector3(0, 2, -5));
         
-        
         let obj2 = new Glory.GameObject("ob1", scene);
-        const obj2Mesh = new Glory.MeshComponent(obj2, "obj2Mesh", scene, Glory.MeshType.SPHERE);
+        const obj2Mesh = new Glory.MeshComponent(obj2, "obj2Mesh", scene, Glory.MeshType.TORUS);
         obj2.addComponent(obj2Mesh);
         // console.log("Components: ", obj2.components);
         
